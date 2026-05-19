@@ -26,6 +26,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Initialize the database object
 db = SQLAlchemy(app)
 
+with app.app_context():
+    db.create_all()
+
 class Visitor(db.Model):
     id = db.Column(db.Integer, primary_key=True) # Unique ID for each row
     name = db.Column(db.String(100), nullable=False) # The visitor's name
