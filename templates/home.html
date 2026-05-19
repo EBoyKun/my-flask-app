@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}My Flask Site{% endblock %}
+
+{% block content %}
+    <h1>Welcome to my Python-powered website {{ name }}!</h1>
+    <p>This page is being served by Flask.</p>
+{% endblock %}
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>My Flask Site</title>
+</head>
+<body>
+    <h1>Welcome to my Python-powered website {{ name }}!</h1>
+    <p>This page is being served by Flask.</p>
+    
+    Our new link to the about page
+    <a href="{{ url_for('about') }}">Learn more about me</a>
+    <a href="{{ url_for('portfolio') }}">Check my projects</a>
+    <a href="{{ url_for('greet') }}">Greeting test</a>
+</body>
+</html> -->

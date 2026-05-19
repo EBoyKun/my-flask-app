@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Flask Site{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Global Navigation Bar -->
+    <nav style="background: #2c3e50; padding: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <a href="{{ url_for('home') }}" style="color: white; margin-right: 15px; text-decoration: none;">Home</a>
+            <a href="{{ url_for('about') }}" style="color: white; margin-right: 15px; text-decoration: none;">About</a>
+            <a href="{{ url_for('portfolio') }}" style="color: white; margin-right: 15px; text-decoration: none;">Portfolio</a>
+            <a href="{{ url_for('greet') }}" style="color: white; margin-right: 15px; text-decoration: none;">Guestbook</a>
+            <a href="{{ url_for('products') }}" style="color: white; text-decoration: none;">Shop</a>
+        </div>
+        
+        <!-- This dynamically changes based on login state -->
+        <div style="color: white;">
+            {% if current_user.is_authenticated %}
+                <span style="margin-right: 15px; color: #2ecc71;">Logged in as: <strong>{{ current_user.username }}</strong></span>
+                <a href="{{ url_for('logout') }}" style="color: #e74c3c; text-decoration: none; background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 4px;">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" style="color: white; text-decoration: none; margin-right: 15px;">Login</a>
+                <a href="{{ url_for('signup') }}" style="color: #3498db; text-decoration: none; font-weight: bold;">Sign Up</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- This is the empty socket where other pages inject their specific HTML -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer style="margin-top: 40px; color: #888; font-size: 0.8em;">
+        <hr>
+        <p>© 2026 My Awesome Flask App</p>
+    </footer>
+
+</body>
+</html>

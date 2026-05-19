@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Guestbook{% endblock %}
+
+{% block content %}
+    <h1>Tell us your name!</h1>
+    
+    <form action="{{ url_for('greet') }}" method="POST">
+        <label for="name-input">Your Name:</label>
+        <input type="text" id="name-input" name="user_name" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <hr>
+
+    <h2>People Who Visited:</h2>
+    <ul>
+        {% for visitor in visitors %}
+            <li style="margin-bottom: 10px;">
+                {{ visitor.name }} 
+                
+                <!-- Each name gets its own mini-form to trigger the delete route -->
+                <form action="{{ url_for('delete_visitor', visitor_id=visitor.id) }}" method="POST" style="display: inline; margin-left: 10px;">
+                    <button type="submit" style="background: #e74c3c; color: white; border: none; padding: 2px 8px; cursor: pointer; border-radius: 3px;">
+                        Delete
+                    </button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Greeting Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Tell us your name!</h1>
+    
+    Our Form
+    <form action="{{ url_for('greet') }}" method="POST">
+        <label for="name-input">Your Name:</label>
+        <input type="text" id="name-input" name="user_name" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <hr>
+
+    Our Database List
+    <h2>People Who Visited:</h2>
+    <ul>
+        {% for visitor in visitors %}
+            <li>{{ visitor.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="{{ url_for('home') }}">Back to the homepage</a></p>
+</body>
+</html> -->

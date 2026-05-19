@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Our Store{% endblock %}
+
+{% block content %}
+    <h1 style="text-align: center;">Featured Tech Products</h1>
+    <p style="text-align: center; color: #666;">Explore high-performance upgrades for your workspace setup.</p>
+
+    <div class="product-grid">
+        {% for product in items %}
+            <div class="product-card">
+                <!-- Dynamic Image -->
+                <img src="{{ product.image }}" alt="{{ product.name }}" class="product-image">
+                
+                <div class="product-details">
+                    <!-- Dynamic Name & Stock status badge -->
+                    <h3>{{ product.name }}</h3>
+                    
+                    {% if product.in_stock %}
+                        <span class="badge badge-in">In Stock</span>
+                    {% else %}
+                        <span class="badge badge-out">Out of Stock</span>
+                    {% endif %}
+                    
+                    <p style="color: #666; font-size: 0.9em; min-height: 50px;">{{ product.description }}</p>
+                    
+                    <!-- Dynamic Price formatting -->
+                    <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
+                    
+                    <!-- Form button behaves differently depending on stock status -->
+                    <button class="buy-btn" {% if not product.in_stock %}disabled{% endif %}>
+                        {% if product.in_stock %}Add to Cart{% else %}Sold Out{% endif %}
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
